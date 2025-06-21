@@ -2,8 +2,13 @@ import { fetchCustomers, fetchInvoiceById } from "@/app/lib/data";
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import Form from "@/app/ui/invoices/edit-form";
 
-export default async function Page(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
+// If your project defines PageProps elsewhere, import it here.
+// Otherwise, use the default structure:
+interface PageProps {
+  params: { id: string };
+}
+
+export default async function Page({ params }: PageProps) {
   const id = params.id;
   const [invoice, customers] = await Promise.all([
     fetchInvoiceById(id),
